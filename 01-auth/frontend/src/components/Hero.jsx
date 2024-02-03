@@ -1,9 +1,9 @@
 const Hero = () => {
   return (
     <div>
-      Hero
+      <h1>Hero</h1>
     </div>
-  )
-}
+  );
+};
 
-export default Hero 
+export default Hero;

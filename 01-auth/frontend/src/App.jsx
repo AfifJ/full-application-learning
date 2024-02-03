@@ -6,7 +6,9 @@ const App = () => {
   return (
     <div>
       <Header />
-      <Outlet />
+      <div className="px-5">
+        <Outlet />
+      </div>
     </div>
   );
 };
