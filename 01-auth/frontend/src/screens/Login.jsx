@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLoginMutation } from '../redux/Users/usersApiSlices.js';
+import { setCredentials } from '../redux/Users/authSlice.js';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -27,10 +29,11 @@ const Login = () => {
         email,
         password,
       }).unwrap();
-      dispatch(setCredential({ ...res }));
+      dispatch(setCredentials({ ...res }));
       navigate('/');
     } catch (err) {
-      console.log(err.data.message || err);
+      console.log(err);
+      toast.error(err?.data?.message || 'Error');
     }
   };
 
@@ -43,7 +46,7 @@ const Login = () => {
           <input
             onChange={(e) => setEmail(e.target.value)}
             id="email"
-            type="email"
+            type="text"
           />
         </div>
         <div>
@@ -57,6 +60,7 @@ const Login = () => {
         <button className="btn btn-primary" type="submit">
           Login
         </button>
+        {isLoading && <div>Loading...</div>}
       </form>
     </div>
   );
